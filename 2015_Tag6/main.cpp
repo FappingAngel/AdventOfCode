@@ -5,8 +5,8 @@
 using namespace std;
 
 int main() {
-    string path = "./inputs.txt";
-    ifstream file(path);
+    ifstream file;
+    file.open("./inputs.txt");
 
     if(!file.is_open()){
         cout << "nicht geöffnet" << endl;
@@ -33,6 +33,7 @@ int main() {
         }
 
         std::cout << "Hello, World!" << std::endl;
+        file.close();
         return 0;
     }
 }
