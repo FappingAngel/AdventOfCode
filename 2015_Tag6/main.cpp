@@ -5,9 +5,8 @@
 using namespace std;
 
 int main() {
-    ifstream file;
-    file.open("./inputs.txt");
-
+    cout << "2" << endl;
+    ifstream file ("C:\\Users\\Max\\CLionProjects\\AdventOfCode\\2015_Tag6\\inputs.txt");
     if(!file.is_open()){
         cout << "nicht geöffnet" << endl;
         return 0;
