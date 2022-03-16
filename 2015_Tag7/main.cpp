@@ -6,9 +6,9 @@
 
 using namespace std;
 
-short LShift(short a, int b){
+/*short LShift(short a, int b){
     return (short)(a<<b);
-}
+} */
 
 int main() {
     ifstream file("C:\\Users\\Max\\CLionProjects\\AdventOfCode\\2015_Tag7\\input.txt");
@@ -20,12 +20,10 @@ int main() {
     string zeile;
     map<string, unsigned short> Namen;
     //map <string, short> Namen;
-    int zeilennummer = 0;
     while (getline(file, zeile)) {
         string substring;
         string variable1, variable2, variable3;
-        int anzahl = 0;
-        zeilennummer++;
+        short anzahl;
 
         // Modus finden
         if (zeile.find("NOT", 0) != string::npos) {
@@ -40,7 +38,7 @@ int main() {
             if (isdigit(variable1[0])) {
                 Namen[variable2] = (~stoi(variable1));
             } else {
-                Namen[variable1] = 0;
+                Namen.insert({variable1,0});
                 Namen[variable2] = (~Namen[variable1]);
             }
 
@@ -53,14 +51,14 @@ int main() {
             variable3 = substring.substr(0, substring.find('\r'));
 
             if (isdigit(variable1[0])) {
-                Namen[variable2] = 0;
+                Namen.insert({variable2,0});
                 Namen[variable3] = (stoi(variable1) & Namen[variable2]);
             } else if (isdigit(variable2[0])) {
-                Namen[variable1] = 0;
+                Namen.insert({variable1,0});
                 Namen[variable3] = (Namen[variable1] & stoi(variable2));
             } else {
-                Namen[variable1] = 0;
-                Namen[variable2] = 0;
+                Namen.insert({variable1,0});
+                Namen.insert({variable2,0});
                 Namen[variable3] = (Namen[variable1] & Namen[variable2]);
             }
 
@@ -73,14 +71,14 @@ int main() {
             variable3 = substring.substr(0, substring.find('\r'));
 
             if (isdigit(variable1[0])) {
-                Namen[variable2] = 0;
+                Namen.insert({variable2,0});
                 Namen[variable3] = (stoi(variable1) | Namen[variable2]);
             } else if (isdigit(variable2[0])) {
-                Namen[variable1] = 0;
+                Namen.insert({variable1,0});
                 Namen[variable3] = (Namen[variable1] | stoi(variable2));
             } else {
-                Namen[variable1] = 0;
-                Namen[variable2] = 0;
+                Namen.insert({variable1,0});
+                Namen.insert({variable2,0});
                 Namen[variable3] = (Namen[variable1] | Namen[variable2]);
             }
 
@@ -95,7 +93,7 @@ int main() {
             if (isdigit(variable1[0])) {
                 Namen[variable3] = (stoi(variable1) >> anzahl);
             } else {
-                Namen[variable1] = 0;
+                Namen.insert({variable1,0});
                 Namen[variable3] = (Namen[variable1] >> anzahl);
             }
 
@@ -110,7 +108,7 @@ int main() {
             if (isdigit(variable1[0])) {
                 Namen[variable3] = (stoi(variable1)) << anzahl;
             } else {
-                Namen[variable1] = 0;
+                Namen.insert({variable1,0});
                 Namen[variable3] = (Namen[variable1]) << anzahl;
             }
 
@@ -126,7 +124,7 @@ int main() {
 
             } else {
 
-                Namen[variable1] = 0;
+                Namen.insert({variable1,0});
                 Namen[variable2] = Namen[variable1];
 
             }
@@ -135,10 +133,10 @@ int main() {
 
     }
 
-    /* for (map<string, unsigned short>::iterator itr = Namen.begin(); itr != Namen.end(); itr++) {
+     for (map<string, unsigned short>::iterator itr = Namen.begin(); itr != Namen.end(); itr++) {
         cout <<"Name: "<< itr->first
        <<" Wert: "<< itr->second << endl;
-    }*/
+    }
 
 }
 
@@ -155,3 +153,6 @@ int main() {
 
 
 // Auseinander bröseln
+// pair<>({});???
+// Bitweise short oder int?
+// Was wenn beide Variablen sind (and/Or)?
