@@ -32,13 +32,17 @@ int main() {
         cerr << "Fehler: Datei konnte nicht geöffnet werden" << endl;
         return 0;
     }
-    int anzahl = 0, iteration;
+    int count = 0;
     bool kondition = true;
     string zeile;
+
+
+
     while (kondition) {
-        iteration = 0;
-        anzahl ++;
+
         while (getline(file, zeile)) {
+            // Für Teil 2 die nächste Zeile einfügen
+            // Namen["b"] = 46065;
 
             // Modus finden
             if (zeile.find("NOT", 0) != string::npos) {
@@ -54,14 +58,12 @@ int main() {
             } else {
                 IS(zeile);
             }
-            iteration ++;
         }
-        if(inputCheck("a")){
-           kondition = false;
+        if (inputCheck("a")) {
+            kondition = false;
         }
         file.clear();
         file.seekg(ios::beg);
-        cout << "Anzahl:Iterationen =  " << anzahl << " : " << iteration<< endl;
     }
     //Ausgabe der Map
     for (map<string, unsigned short>::iterator itr = Namen.begin(); itr != Namen.end(); itr++) {
@@ -206,7 +208,5 @@ void LSHIFT(string zeile) {
     }
 }
 
-//weiter machen, bis Zeile 7 wahr ist
-//ifstream liest nicht neu aus?
-//file.close() nach vorne verschieben
+
 
